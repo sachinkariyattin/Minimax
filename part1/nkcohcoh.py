@@ -1,4 +1,5 @@
 import copy
+import sys
 import numpy as np
 
 # count number of marbles in a column
@@ -181,7 +182,6 @@ def max_func(current_board, current_depth, alpha, beta):
     best_move = []
 
     current_best_score = -100000
-    #best_score = -100000
 
     for s in max_successors:
         score = count_score(s, current_depth)
@@ -204,7 +204,6 @@ def min_func(current_board, current_depth, alpha, beta):
     best_move = []
 
     current_best_score = 100000
-    #best_score = 100000
 
     for s in min_successors:
         score = count_score(s, current_depth)
@@ -241,22 +240,33 @@ def convert_board(initial_board):
     tuple_to_list = [list(i) for i in row_list]
     return tuple_to_list
 
-
 def get_next_step(converted_board):
     global depth
-    while depth < 100:
+    while depth < 50:
         next_step = minimax(converted_board)
-        print "Depth "+ str(depth)
-        print next_step
+        final_step = ""
+        # convert it to string
+        for k in next_step:
+            final_step += "".join(k)
+        print "New Board: "
+        print ("".join(final_step))
+        print
         depth += 1
 
 # get initial board
+n = int(sys.argv[1])
+k = int(sys.argv[2])
+#board = sys.argv[3]
+board = "wbwbwbbwbwww..bbw.bwbb.ww"
+time = int(sys.argv[4])
 
-depth = 1
-n = 3
-k = 2
-board = "b.w...w.."
+if n <= 3 and time >= 5:
+    depth = 6
+elif n > 3 and n <= 7 and time >= 15:
+    depth = 4
+else:
+    depth = 1
+
 converted_board = convert_board(board)
-print converted_board
-print "Checking state depth wise"
+print "Thinking! Please wait......"
 get_next_step(converted_board)
