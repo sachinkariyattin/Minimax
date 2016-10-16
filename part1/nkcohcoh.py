@@ -256,8 +256,7 @@ def get_next_step(converted_board):
 # get initial board
 n = int(sys.argv[1])
 k = int(sys.argv[2])
-#board = sys.argv[3]
-board = "wbwbwbbwbwww..bbw.bwbb.ww"
+board = sys.argv[3]
 time = int(sys.argv[4])
 
 if n <= 3 and time >= 5:
